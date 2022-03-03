@@ -1,6 +1,14 @@
 version: '3.7'
 
 services:
+  jenkins:
+    restart: on-failure:10
+    image: jenkins/jenkins:latest
+    container_name: my-jenkins
+    ports:
+      - 8099:8080
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
 
   # The 'setup' service runs a one-off script which initializes the
   # 'logstash_internal' and 'kibana_system' users inside Elasticsearch with the
@@ -91,3 +99,4 @@ networks:
 volumes:
   setup:
   elasticsearch:
+  jenkins_home:
